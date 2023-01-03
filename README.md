@@ -16,7 +16,7 @@ Currently, the new version of the tool only supports **Offline** mode of migrati
 
 The new version of the migration tool is a hosted solution where we spin up a purpose-built docker container in the target Flexible server VM and drive the incoming migrations. This docker container will be spun up on-demand when a migration is initiated from a single server and will be decommissioned as soon as the migration is completed. The migration container will use a new binary called [**pgcopydb**](https://github.com/dimitri/pgcopydb) which provides a fast and efficient way of copying databases from one server to another. Though pgcopydb uses the traditional pg_dump and pg_restore for schema migration, it implements its own data migration mechanism which involves multi-process streaming parts from source to target. Also, pgcopydb bypasses pg_restore way of index building and drives that internally in a way that all indexes can be built concurrently. So, the data migration process is much quicker with pgcopydb. Following is the process diagram of the new version of the migration tool.
 
-:::image type="content" source="images/ProcessDiagram.png" alt-text="Screenshot that shows process diagram of the migration using FMS.":::
+![Process diagram](/images/ProcessDiagram.png?raw=true "Process Diagram")
 
 The following table shows the approximate time for performing offline migrations for databases of various sizes using the new version of the tool. Note that the migration was performed on the **General-Purpose Flexible server with Standard_D4s_v3 SKU (4VCore), 4TB Storage and 6400 IOPs.**
 
