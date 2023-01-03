@@ -91,33 +91,33 @@ Once the pre-requisite steps are taken care of, you can perform the following st
 
 - Go to your Azure Database for PostgreSQL Flexible Server. Scroll down to **Migration (preview)** option and select it.
 
-:::image type="content" source="images/PortalPic1.png" alt-text="Portal Screenshot 1.":::
+![Portal Pic1](/images/PortalPic1.png?raw=true "Portal Pic1")
 
 - Select the **Migrate from Single Server button** to start a migration from Single Server to Flexible Server. 
 
-:::image type="content" source="images/PortalPic2.png" alt-text="Portal Screenshot 2.":::  
+![Portal Pic2](/images/PortalPic2.png?raw=true "Portal Pic2")
 
 - This opens a wizard with a series of tabs. First is the **setup** tab which prompts for a migration name. Please ensure that all extensions used in single server are enabled on the flexible server.
 
-:::image type="content" source="images/PortalPic3.png" alt-text="Portal Screenshot 3.":::
+![Portal Pic3](/images/PortalPic3.png?raw=true "Portal Pic3")
 
 Enter a valid migration name and select the **Next** button.
 
 - The next is the **Source** tab
 
-:::image type="content" source="images/PortalPic4.png" alt-text="Portal Screenshot 4.":::
+![Portal Pic4](/images/PortalPic4.png?raw=true "Portal Pic4")
 
 Pick the subscription and resource group of your single server and provide the password for the admin user of your single server. Pick up to a maximum of 8 databases for the migration and click on the **Next** button.
 
 - The next is the **Target** tab
 
-:::image type="content" source="images/PortalPic5.png" alt-text="Portal Screenshot 5.":::
+![Portal Pic5](/images/PortalPic5.png?raw=true "Portal Pic5")
 
 Please provide the password for the admin user of flexible server and the rest of the details are already filled out. Click on the **Next** button.
 
 - The final tab is the **Review and Create**.
 
-:::image type="content" source="images/PortalPic6.png" alt-text="Portal Screenshot 6.":::
+![Portal Pic6](/images/PortalPic6.png?raw=true "Portal Pic6")
 
 Review the information and click on the **Create** button.
 
@@ -125,11 +125,11 @@ Review the information and click on the **Create** button.
 
 After you hit the Create button, a notification appears in a few seconds to say that the migration was successfully created. You should automatically be redirected to the **Migration (Preview)** page of Flexible Server. It should have a new entry for the recently created migration.
 
-:::image type="content" source="images/PortalPic7.png" alt-text="Portal Screenshot 7.":::
+![Portal Pic7](/images/PortalPic7.png?raw=true "Portal Pic7")
 
 You can also select the migration name in the grid to see the details of that migration.
 
-:::image type="content" source="images/PortalPic8.png" alt-text="Portal Screenshot 8.":::
+![Portal Pic8](/images/PortalPic8.png?raw=true "Portal Pic8")
 
 Use the refresh button to get the latest status of the migration. Over time, the migration will succeed or fail with appropriate errors.
 
