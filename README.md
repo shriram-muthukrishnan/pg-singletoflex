@@ -2,13 +2,13 @@
 
  FMS is a managed migration service provided by Microsoft to migrate databases from Azure database for PostgreSQL Single server to Azure Database for PostgreSQL Flexible server.
 
- In order to get started with the migration tooling, please use the following sign up form - https://forms.office.com/r/pvA7vy455P
+ In order to get started with the migration tooling, please use the following sign up form - <https://forms.office.com/r/pvA7vy455P>
 
- Please reach out to us at AskAzureDBforPGS2F@microsoft.com for any kind of support needed on migrations from Single server to Flexible server. 
+ Please reach out to us at AskAzureDBforPGS2F@microsoft.com for any kind of support needed on migrations from Single server to Flexible server.
 
 ## Introduction
 
-The Single to Flexible server migration tool is designed to move databases from Azure Database for PostgreSQL Single server to Flexible server. We launched the preview version of the tool also known as the **Migration (Preview)** feature in Flexible server, back in August 2022 for customers to try out migrations. The preview version used an infrastructure based on Azure Database Migration Service (DMS). We have aggregated feedback from customers and have come up with an improved version of the migration tool which will use a new infrastructure to perform migrations in a more easy, robust and resilient way. This document will help you understand the functioning of the new version of the tool along with its limitations and the pre-requisites that need to be taken care of before using the tool.    
+The Single to Flexible server migration tool is designed to move databases from Azure Database for PostgreSQL Single server to Flexible server. We launched the preview version of the tool also known as the **Migration (Preview)** feature in Flexible server, back in August 2022 for customers to try out migrations. The preview version used an infrastructure based on Azure Database Migration Service (DMS). We have aggregated feedback from customers and have come up with an improved version of the migration tool which will use a new infrastructure to perform migrations in a more easy, robust and resilient way. This document will help you understand the functioning of the new version of the tool along with its limitations and the pre-requisites that need to be taken care of before using the tool.
 
 Currently, the new version of the tool only supports **Offline** mode of migration. Offline mode presents a simple and hassle-free way to migrate your databases but might incur downtime to your server depending on the size of the databases and the way in which data is distributed across tables in your database.
 
@@ -51,7 +51,7 @@ From the above data, it is very clear that with a higher compute on Flexible ser
 - You can have only one active migration to your flexible server.
 - Only a max of 8 databases can be included in one migration attempt from single to flexible server. If you have more than 8 databases, you must wait for the first migration to be completed before initiating another migration for the rest of the databases. Support for migration of more than 8 databases will be introduced in a later version of the tool.
 - Only offline mode is supported as of now. Online mode will be introduced later in a later version of migration tool.
-- The source and target server must be in the same Azure region. Cross region migrations will not work in this version of the migration tool. 
+- The source and target server must be in the same Azure region. Cross region migrations will not work in this version of the migration tool.
 - Collation mismatches between single and flexible server are not handled by the tool. If there is a collation used in single server that does not exist in flexible server, the migration will fail.
 - The migration tool does not migrate users and roles. You should consider creating users and roles in your flexible server after the completion of data migration.
 
@@ -67,23 +67,36 @@ From the above data, it is very clear that with a higher compute on Flexible ser
 - Change the SKU of the flexible server to match the application needs. Note that this change will need a database server restart.
 - Migrate users and roles from single to flexible servers. This can be done in a manual way by creating users on flexible servers and providing them with suitable privileges or by using this [**Python script**](https://microsoftapc-my.sharepoint.com/:w:/g/personal/chajain_microsoft_com/Ea8cRd0rGX5FtDPaJPBL6roBVinu0qWLDXotpCsI5cF-4g?wdOrigin=TEAMS-ELECTRON.p2p.p2p&wdExp=TEAMS-CONTROL&wdhostclicktime=1670907831526&web=1&wdLOR=cD6324225-CC1F-4A46-80EB-78998A059782) which automates the process.
 - Make changes to your application to point the connection strings to flexible server.
-- Monitor the database performance closely to see if performance tuning is required. 
+- Monitor the database performance closely to see if performance tuning is required.
 
 ## How can customers consume it?
 
-The new version of the migration tool can be consumed from Azure Portal. Once you share your subscription details, we will enable the new version of the migration tool on your subscription. 
+The new version of the migration tool can be consumed from Azure Portal. Once you share your subscription details, we will enable the new version of the migration tool on your subscription.
 
 ### Pre-requisites
 
-Here is the list of pre-requisites to get started with the migration tool. 
+Here is the list of pre-requisites to get started with the migration tool.
 
- - [Create a flexible server with higher SKU for migration purposes.](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/quickstart-create-server-portal)
- - [Enable all extensions used in single server on flexible server.](https://learn.microsoft.com/en-us/azure/postgresql/migrate/concepts-single-to-flexible#allow-list-required-extensions)
- - Enable network connectivity from target flexible server to single server.
-     - If both single and flexible servers are public access, there is no action needed from your end to establish connectivity. The migration tool automatically allow-lists the IP of flexible server in single server.
-     - If single server is public access and flexible server is inside a VNet, please allow connections from the VNet of flexible server to your single server by adding a [VNet rule or service end point](https://learn.microsoft.com/en-us/azure/postgresql/single-server/concepts-data-access-and-security-vnet).
-     - If the single server is behind a private end point and flexible server is public access, there is no way to establish connectivity between the servers. The migrations will fail, and this scenario is not supported by the new version of the migration tool.
-     - If the single server is behind a private end point and flexible server is inside a VNet, ensure the VNets associated with private end point and flexible server are connected. This will involve VNet peering if VNets of source and target are different. If both are in the same VNet, make sure there is no network security group (NSG) rule that is blocking the connectivity between the flexible server and single server.
+- [Create a flexible server with higher SKU for migration purposes.](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/quickstart-create-server-portal)
+- Enable all extensions used in single server on flexible server by performing the following steps.
+
+   1. Use select command in the Single Server databases to list all the extensions that are used.
+
+      ```
+      select * from pg_extension
+      ```
+
+      The output of the above command gives the list of extensions currently active on the Single Server
+
+   2. Enable the list of extensions obtained from step 1 in the Flexible Server. Search for the 'azure.extensions' parameter by selecting the Server Parameters tab in the side pane. Select the extensions that are to be allow-listed and click Save.
+
+    ![Extensions allow listing](images/extensions.png)
+
+- Enable network connectivity from target flexible server to single server.
+  - If both single and flexible servers are public access, there is no action needed from your end to establish connectivity. The migration tool automatically allow-lists the IP of flexible server in single server.
+  - If single server is public access and flexible server is inside a VNet, please allow connections from the VNet of flexible server to your single server by adding a [VNet rule or service end point](https://learn.microsoft.com/en-us/azure/postgresql/single-server/concepts-data-access-and-security-vnet).
+  - If the single server is behind a private end point and flexible server is public access, there is no way to establish connectivity between the servers. The migrations will fail, and this scenario is not supported by the new version of the migration tool.
+  - If the single server is behind a private end point and flexible server is inside a VNet, ensure the VNets associated with private end point and flexible server are connected. This will involve VNet peering if VNets of source and target are different. If both are in the same VNet, make sure there is no network security group (NSG) rule that is blocking the connectivity between the flexible server and single server.
 
 ### Portal Experience
 
@@ -93,7 +106,7 @@ Once the pre-requisite steps are taken care of, you can perform the following st
 
 ![Portal Pic1](images/PortalPic1.png)
 
-- Select the **Migrate from Single Server button** to start a migration from Single Server to Flexible Server. 
+- Select the **Migrate from Single Server button** to start a migration from Single Server to Flexible Server.
 
 ![Portal Pic2](images/PortalPic2.png)
 
@@ -135,4 +148,4 @@ Use the refresh button to get the latest status of the migration. Over time, the
 
 ### Support
 
-Please reach out to us at AskAzureDBforPGS2F@microsoft.com for any kind of support needed on migrations from single server to flexible server. 
+Please reach out to us at AskAzureDBforPGS2F@microsoft.com for any kind of support needed on migrations from single server to flexible server.
