@@ -16,7 +16,7 @@ Currently, the new version of the tool only supports **Offline** mode of migrati
 
 The new version of the migration tool is a hosted solution where we spin up a purpose-built docker container in the target Flexible server VM and drive the incoming migrations. This docker container will be spun up on-demand when a migration is initiated from a single server and will be decommissioned as soon as the migration is completed. The migration container will use a new binary called [**pgcopydb**](https://github.com/dimitri/pgcopydb) which provides a fast and efficient way of copying databases from one server to another. Though pgcopydb uses the traditional pg_dump and pg_restore for schema migration, it implements its own data migration mechanism which involves multi-process streaming parts from source to target. Also, pgcopydb bypasses pg_restore way of index building and drives that internally in a way that all indexes can be built concurrently. So, the data migration process is much quicker with pgcopydb. Following is the process diagram of the new version of the migration tool.
 
-![Process diagram](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/ProcessDiagram.png)
+![Process diagram](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/ProcessDiagram.png "Process Diagram")
 
 The following table shows the approximate time for performing offline migrations for databases of various sizes using the new version of the tool. Note that the migration was performed on the **General-Purpose Flexible server with Standard_D4s_v3 SKU (4VCore), 4TB Storage and 6400 IOPs.**
 
@@ -90,7 +90,7 @@ Here is the list of pre-requisites to get started with the migration tool.
 
    2. Enable the list of extensions obtained from step 1 in the Flexible Server. Search for the 'azure.extensions' parameter by selecting the Server Parameters tab in the side pane. Select the extensions that are to be allow-listed and click Save.
 
-    ![Extensions allow listing](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/extensions.png)
+    ![Extensions allow listing](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/extensions.png "Extension allow listing")
 
 - Enable network connectivity from target flexible server to single server.
   - If both single and flexible servers are public access, there is no action needed from your end to establish connectivity. The migration tool automatically allow-lists the IP of flexible server in single server.
@@ -104,33 +104,33 @@ Once the pre-requisite steps are taken care of, you can perform the following st
 
 - Go to your Azure Database for PostgreSQL Flexible Server. Scroll down to **Migration (preview)** option and select it.
 
-![Portal Pic1](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic1.png)
+![Portal Pic1](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic1.png "Portal Pic1")
 
 - Select the **Migrate from Single Server button** to start a migration from Single Server to Flexible Server.
 
-![Portal Pic2](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic2.png)
+![Portal Pic2](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic2.png "Portal Pic2")
 
 - This opens a wizard with a series of tabs. First is the **setup** tab which prompts for a migration name. Please ensure that all extensions used in single server are enabled on the flexible server.
 
-![Portal Pic3](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic3.png)
+![Portal Pic3](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic3.png "Portal Pic3")
 
 Enter a valid migration name and select the **Next** button.
 
 - The next is the **Source** tab
 
-![Portal Pic4](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic4.png)
+![Portal Pic4](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic4.png "Portal Pic4")
 
 Pick the subscription and resource group of your single server and provide the password for the admin user of your single server. Pick up to a maximum of 8 databases for the migration and click on the **Next** button.
 
 - The next is the **Target** tab
 
-![Portal Pic5](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic5.png)
+![Portal Pic5](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic5.png "Portal Pic5")
 
 Please provide the password for the admin user of flexible server and the rest of the details are already filled out. Click on the **Next** button.
 
 - The final tab is the **Review and Create**.
 
-![Portal Pic6](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic6.png)
+![Portal Pic6](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic6.png "Portal Pic6")
 
 Review the information and click on the **Create** button.
 
@@ -138,11 +138,11 @@ Review the information and click on the **Create** button.
 
 After you hit the Create button, a notification appears in a few seconds to say that the migration was successfully created. You should automatically be redirected to the **Migration (Preview)** page of Flexible Server. It should have a new entry for the recently created migration.
 
-![Portal Pic7](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic7.png)
+![Portal Pic7](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic7.png "Portal Pic7")
 
 You can also select the migration name in the grid to see the details of that migration.
 
-![Portal Pic8](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic8.png)
+![Portal Pic8](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic8.png "Portal Pic8")
 
 Use the refresh button to get the latest status of the migration. Over time, the migration will succeed or fail with appropriate errors.
 
