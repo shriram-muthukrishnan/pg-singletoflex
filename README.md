@@ -65,7 +65,7 @@ From the above data, it is very clear that with a higher compute on Flexible ser
 - Once the migration is completed, please verify the data on your flexible server and make sure it is an exact copy of the single server.
 - Post verification, enable HA/ backup options as needed on your flexible server.
 - Change the SKU of the flexible server to match the application needs. Note that this change will need a database server restart.
-- Migrate users and roles from single to flexible servers. This can be done in a manual way by creating users on flexible servers and providing them with suitable privileges or by using this [**Python script**](https://microsoftapc-my.sharepoint.com/:w:/g/personal/chajain_microsoft_com/Ea8cRd0rGX5FtDPaJPBL6roBVinu0qWLDXotpCsI5cF-4g?wdOrigin=TEAMS-ELECTRON.p2p.p2p&wdExp=TEAMS-CONTROL&wdhostclicktime=1670907831526&web=1&wdLOR=cD6324225-CC1F-4A46-80EB-78998A059782) which automates the process.
+- Migrate users and roles from single to flexible servers. This can be done in a manual way by creating users on flexible servers and providing them with suitable privileges or by using this [**Python script**](migrateUsersRolesFirewall.docx) which automates the process.
 - Make changes to your application to point the connection strings to flexible server.
 - Monitor the database performance closely to see if performance tuning is required.
 
