@@ -91,33 +91,33 @@ Once the pre-requisite steps are taken care of, you can perform the following st
 
 - Go to your Azure Database for PostgreSQL Flexible Server. Scroll down to **Migration (preview)** option and select it.
 
-![Portal Pic1](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic1.png)
+![Portal Pic1](images/PortalPic1.png)
 
 - Select the **Migrate from Single Server button** to start a migration from Single Server to Flexible Server. 
 
-![Portal Pic2](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic2.png)
+![Portal Pic2](images/PortalPic2.png)
 
 - This opens a wizard with a series of tabs. First is the **setup** tab which prompts for a migration name. Please ensure that all extensions used in single server are enabled on the flexible server.
 
-![Portal Pic3](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic3.png)
+![Portal Pic3](images/PortalPic3.png)
 
 Enter a valid migration name and select the **Next** button.
 
 - The next is the **Source** tab
 
-![Portal Pic4](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic4.png)
+![Portal Pic4](images/PortalPic4.png)
 
 Pick the subscription and resource group of your single server and provide the password for the admin user of your single server. Pick up to a maximum of 8 databases for the migration and click on the **Next** button.
 
 - The next is the **Target** tab
 
-![Portal Pic5](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic5.png)
+![Portal Pic5](images/PortalPic5.png)
 
 Please provide the password for the admin user of flexible server and the rest of the details are already filled out. Click on the **Next** button.
 
 - The final tab is the **Review and Create**.
 
-![Portal Pic6](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic6.png)
+![Portal Pic6](images/PortalPic6.png)
 
 Review the information and click on the **Create** button.
 
@@ -125,11 +125,11 @@ Review the information and click on the **Create** button.
 
 After you hit the Create button, a notification appears in a few seconds to say that the migration was successfully created. You should automatically be redirected to the **Migration (Preview)** page of Flexible Server. It should have a new entry for the recently created migration.
 
-![Portal Pic7](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic7.png)
+![Portal Pic7](images/PortalPic7.png)
 
 You can also select the migration name in the grid to see the details of that migration.
 
-![Portal Pic8](https://github.com/shriram-muthukrishnan/pg-singletoflex/blob/main/images/PortalPic8.png)
+![Portal Pic8](images/PortalPic8.png)
 
 Use the refresh button to get the latest status of the migration. Over time, the migration will succeed or fail with appropriate errors.
 
