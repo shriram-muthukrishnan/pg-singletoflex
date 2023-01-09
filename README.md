@@ -65,7 +65,7 @@ From the above data, it is very clear that with a higher compute on Flexible ser
 - Once the migration is completed, please verify the data on your flexible server and make sure it is an exact copy of the single server.
 - Post verification, enable HA/ backup options as needed on your flexible server.
 - Change the SKU of the flexible server to match the application needs. Note that this change will need a database server restart.
-- Migrate users and roles from single to flexible servers. This can be done in a manual way by creating users on flexible servers and providing them with suitable privileges or by using this[**Python script**](migrate_roles_users.py) which automates the process. The details of how to run the script can be found [here](MigrateUsersAndRoles.txt)
+- Migrate users and roles from single to flexible servers. This can be done in a manual way by creating users on flexible servers and providing them with suitable privileges or by using this [**Python script**](migrate_roles_users.py) which automates the process. The details of running the script can be found [here](MigrateUsersAndRoles.txt)
 - Make changes to your application to point the connection strings to flexible server.
 - Monitor the database performance closely to see if performance tuning is required.
 
