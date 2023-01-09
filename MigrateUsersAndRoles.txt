@@ -1,0 +1,33 @@
+Prerequisites to run the script:
+
+Overview:
+The script is a python script that will connect to source server(Single Server for Azure Database for PG)
+and target server(Flex server) and recreate all roles/users and also run all the grant/revoke statements 
+for all the database users/roles.
+
+To run the Script, following are to be kept in mind:
+1. Running this script is a post migration activity so it assumes that the schema on souce and target
+server is the same.
+2. The script will not migrate the admin user from single server(used while creating the single server) 
+to the Flexible server.
+3. Only The databases that are mentioned while running this script , for those only will the grant/revoke
+statements be run and for not any other database objects.
+4. To Run this script , the user would need :
+    a. Single and Flexible Server Fully Qualified Domain Names.
+    b. Single and Flexible server Admin User Names.
+    c. Single and Flexible Server Admin User Passwords.
+    d. Ports on which the Single and Flexible Server are Running.
+5. The machine used to run this script must be a linux machine and it is the responsibility of the user
+that this machine has connectivity to the source and target Postgres Servers.
+
+
+Environment Prequisites to be met:
+1. A linux machine (Preferably Ubuntu) with connectivity to source and target Postgres Servers.
+2. Python3, pip and virtual environment installed on the machine.(Upto Step 2 in this blog: https://www.digitalocean.com/community/tutorials/how-to-install-python-3-and-set-up-a-programming-environment-on-an-ubuntu-20-04-server)
+3. Install psycopg2 in the activated virtual environment(https://www.psycopg.org/install/)
+
+
+Run the script using the following command:
+
+python3 migrate_roles_users.py -srcfqdn sterling-server.postgres.database.azure.com -srcuser postgres@sterling-server -srcpgport 5432 -targetfqdn flexible-server.postgres.database.azure.com -targetuser postgres -targetport 5432 --dbs hello hello1 hello2
+
