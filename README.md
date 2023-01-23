@@ -82,9 +82,9 @@ Here is the list of pre-requisites to get started with the migration tool.
 
    Use this select command in the Single Server databases to list all the extensions that are used.
 
-      
+
       select * from pg_extension
-      
+
 
    Check if the list includes any of the following extensions:
   - PG_CRON
@@ -109,7 +109,7 @@ Here is the list of pre-requisites to get started with the migration tool.
 
    Use the **Save and Restart** option and wait for the postgresql server to be restarted.
 
-   **Step 2:** Search for the **azure.extensions** parameter on the Server Parameters blade. Select the list of all extensions obtained by running the **select** query on your Single server database and click Save.
+   **Step 2:** Search for the **azure.extensions** parameter on the Server Parameters blade. Select the list of all extensions obtained by running the **select** query on your Single server database and click Save. Wait for the deployment to complete before getting started with the migration.
 
     ![Extensions allow listing](./images/extensions.png "Extension allow listing")
 
