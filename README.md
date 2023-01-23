@@ -82,9 +82,9 @@ Here is the list of pre-requisites to get started with the migration tool.
 
    Use this select command in the Single Server databases to list all the extensions that are used.
 
-      ```
+      
       select * from pg_extension
-      ```
+      
 
    Check if the list includes any of the following extensions:
   - PG_CRON
