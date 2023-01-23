@@ -78,17 +78,38 @@ The new version of the migration tool can be consumed from Azure Portal. Once yo
 Here is the list of pre-requisites to get started with the migration tool.
 
 - [Create a flexible server with higher SKU for migration purposes.](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/quickstart-create-server-portal)
-- Enable all extensions used in single server on flexible server by performing the following steps.
+- Enable all extensions used in single server databases on flexible server by performing the following steps.
 
-   1. Use select command in the Single Server databases to list all the extensions that are used.
+   Use this select command in the Single Server databases to list all the extensions that are used.
 
       ```
       select * from pg_extension
       ```
 
-      The output of the above command gives the list of extensions currently active on the Single Server
+   Check if the list includes any of the following extensions:
+  - PG_CRON
+  - PG_HINT_PLAN
+  - PG_PARTMAN_BGW
+  - PG_PREWARM
+  - PG_STAT_STATEMENTS
+  - PG_AUDIT
+  - PGLOGICAL
+  - TIMESCALEDB
+  - WAL2JSON
 
-   2. Enable the list of extensions obtained from step 1 in the Flexible Server. Search for the 'azure.extensions' parameter by selecting the Server Parameters tab in the side pane. Select the extensions that are to be allow-listed and click Save.
+   If yes, follow **Step 1** and **Step 2**. If not, directly go to **Step 2**.
+
+   **Step 1:** Go to the server parameters blade and search for **shared_preload_libraries** parameter. This indicates the set of extension libraries that are preloaded at the server restart. By default, **pg_cron** and **pg_stat_statements** extensions are selected. Select the list of above extensions used by the single server database to this parameter and click on Save.
+
+   ![Shared Preload Libraries](./images/shared_preload_libraries.png "Shared preload libraries")
+
+   This would require a server restart for the changes to kick in.
+
+   ![Save and Restart](./images/saveAndRestart.png "Save and Restart")
+
+   Use the **Save and Restart** option and wait for the postgresql server to be restarted.
+
+   **Step 2:** Search for the **azure.extensions** parameter on the Server Parameters blade. Select the list of all extensions obtained by running the **select** query on your Single server database and click Save.
 
     ![Extensions allow listing](./images/extensions.png "Extension allow listing")
 
