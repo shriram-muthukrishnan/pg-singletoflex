@@ -85,8 +85,11 @@ Here is the list of pre-requisites to get started with the migration tool.
 
       select * from pg_extension
 
+   Search for the **azure.extensions** parameter on the Server Parameters blade. Select the list of extensions obtained by running the above query on your Single server database to this server parameter and click Save. You should wait for the deployment to complete before proceeding further.
 
-   Check if the list includes any of the following extensions:
+    ![Extensions allow listing](./images/extensions.png "Extension allow listing")
+
+   Check if the list contains any of the following extensions:
   - PG_CRON
   - PG_HINT_PLAN
   - PG_PARTMAN_BGW
@@ -97,9 +100,9 @@ Here is the list of pre-requisites to get started with the migration tool.
   - TIMESCALEDB
   - WAL2JSON
 
-   If yes, follow **Step 1** and **Step 2**. If not, directly go to **Step 2**.
+   If yes, then follow the below steps.  
 
-   **Step 1:** Go to the server parameters blade and search for **shared_preload_libraries** parameter. This indicates the set of extension libraries that are preloaded at the server restart. By default, **pg_cron** and **pg_stat_statements** extensions are selected. Select the list of above extensions used by the single server database to this parameter and click on Save.
+   Go to the server parameters blade and search for **shared_preload_libraries** parameter. This indicates the set of extension libraries that are preloaded at the server restart. By default, **pg_cron** and **pg_stat_statements** extensions are selected. Select the list of above extensions used by the single server database to this parameter and click on Save.
 
    ![Shared Preload Libraries](./images/shared_preload_libraries.png "Shared preload libraries")
 
@@ -108,10 +111,6 @@ Here is the list of pre-requisites to get started with the migration tool.
    ![Save and Restart](./images/saveAndRestart.png "Save and Restart")
 
    Use the **Save and Restart** option and wait for the postgresql server to be restarted.
-
-   **Step 2:** Search for the **azure.extensions** parameter on the Server Parameters blade. Select the list of all extensions obtained by running the **select** query on your Single server database and click Save. Wait for the deployment to complete before getting started with the migration.
-
-    ![Extensions allow listing](./images/extensions.png "Extension allow listing")
 
 - Enable network connectivity from target flexible server to single server.
   - If both single and flexible servers are public access, there is no action needed from your end to establish connectivity. The migration tool automatically allow-lists the IP of flexible server in single server.
