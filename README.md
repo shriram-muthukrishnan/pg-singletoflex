@@ -22,9 +22,9 @@ The following table shows the approximate time for performing offline migrations
 
 | Database size | Approximate time taken (HH:MM:SS) |
 |:---------------|:-------------|
-| 1 GB | 00:00:01 |
-| 5 GB | 00:00:03 |
-| 10 GB | 00:00:08 |
+| 1 GB | 00:01:00 |
+| 5 GB | 00:03:00 |
+| 10 GB | 00:08:00 |
 | 50 GB | 01:45:00 |
 | 100 GB | 06:00:00 |
 | 500 GB | 08:00:00 |
